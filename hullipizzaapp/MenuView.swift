@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct MenuView : View {
+    var menu:[MenuItem]
     var body: some View {
-        VStack(alignment:.center) {
-            Text("Pizza Menu").font(Font.system(size: 20)).bold()
-            MenuRowView()
+        ScrollView{
+            ForEach(menu){ item in
+                MenuRowView(item:item)
+            }
         }
     }
 }
 
 struct MenuView_Previews : PreviewProvider{
     static var previews: some View{
-        MenuView()
+        MenuView(menu:MenuModel().menu)
     }
 }

@@ -8,29 +8,29 @@
 import SwiftUI
 
 struct MenuRowView: View {
+    var item:MenuItem
     var body: some View {
-        ScrollView{
-            ForEach(1...25,id: \.self){ item in
-               
+        HStack{
+            if let image = UIImage(named: "pizza"){
+                Image(uiImage: image).resizable().scaledToFit()
+                    .clipShape(Circle())
+                    .padding(.trailing,-25)
+                    .padding(.leading,-15)
+            } else{
+                Image("default")
+            }
+            VStack{
                 HStack {
-                    Image(systemName: "\(item).circle.fill").font(.title)
-                    HStack{
-                        Image("pizza").resizable().scaledToFit()
-                            .clipShape(.circle)
-                            .padding(.top,15)
-                            .padding(.leading,-1)
-                        VStack{
-                            Text("Margherita")
-                            RatingView(rating: 4)
-                        }
-                    }
-//                    MenuItemView(item: item)
+                    Text(item.name)
+                    Spacer()
+                    Text(item.price,format: .currency(code: "USD"))
                 }
+                RatingView(rating: item.rating)
             }
         }
     }
 }
 	
 #Preview {
-    MenuRowView()
+    MenuRowView(item: testMenuItem)
 }

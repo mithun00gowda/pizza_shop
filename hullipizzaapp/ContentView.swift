@@ -8,15 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    var showOrder : Bool = true
+    var menu:[MenuItem]
+    @State private var orders:[OrderItem] = testOrders
+    @State private var showOrder : Bool = false
     var body: some View {
         VStack() {
             HeaderView().shadow(radius: 5)
+            HStack {
+                Text("\(orders.count) orders")
+                Spacer()
+                Button{
+                    showOrder.toggle()
+                }label: {
+                    Image(systemName: showOrder ? "cart" : "menucard")
+                        
+                        
+                }
+                
+            }.foregroundStyle(.white)
+            .font(.title2)
             if(showOrder){
-                OrderView()
+                OrderView(orders:  $orders)
             }else{
                 MenuItemView().padding().background(.thinMaterial,in: RoundedRectangle(cornerRadius: 10))
-                MenuView()
+                MenuView(menu:menu)
                 
             }
            
@@ -28,5 +43,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(menu:MenuModel().menu)
 }
