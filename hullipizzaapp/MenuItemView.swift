@@ -9,11 +9,12 @@ import SwiftUI
 
 struct MenuItemView: View {
 //    var item : Int
+    @Binding var item:MenuItem
     var body: some View {
         VStack{
             
             HStack{
-                Text("Margherita Mithun Pizza")
+                Text(item.name)
                     .font(.title2)
                     .fontWeight(.semibold)  .foregroundStyle(.black)
                     .padding(.leading)
@@ -30,7 +31,7 @@ struct MenuItemView: View {
                 .shadow(color: .teal,radius: 5,x: 8,y: 8)
             VStack(alignment:.center){
                 
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod metus eu maximus aliquam. Nullam nec ipsum porta, dictum eros ut, hendrerit ligula. Suspendisse potenti. Vivamus cursus metus lacus, nec venenatis ante imperdiet eu. Suspendisse potenti. Aenean id convallis nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci varius.").font(.custom("Georgia", fixedSize: 18))
+                Text(item.description).font(.custom("Georgia", fixedSize: 18))
                 
 //                RatingView(rating: 5)
 //                MenuRowView()
@@ -40,5 +41,5 @@ struct MenuItemView: View {
 }
 
 #Preview {
-    MenuItemView()
+    MenuItemView(item: .constant(testMenuItem))
 }
