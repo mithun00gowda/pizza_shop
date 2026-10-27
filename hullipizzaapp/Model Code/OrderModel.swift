@@ -20,7 +20,7 @@ class OrderModel: ObservableObject{
     private var lastID:Int = 0
     ///Use only for testing purposes
     init(){
-//        // Testing Code: comment out for production
+        // Testing Code: comment out for production
 //        orderItems.append(OrderItem(id:0,item: testMenuItem))
 //        orderItems.append(OrderItem(id:1,item: MenuModel().menu[3],quantity: 2))
 //        lastID = 1

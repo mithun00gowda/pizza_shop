@@ -10,6 +10,8 @@ import SwiftUI
 struct MenuItemView: View {
 //    var item : Int
     @Binding var item:MenuItem
+    @State private var addedItem:Bool = false
+    @ObservedObject var orders : OrderModel
     var body: some View {
         VStack{
             
@@ -36,10 +38,24 @@ struct MenuItemView: View {
 //                RatingView(rating: 5)
 //                MenuRowView()
             }
+            Spacer()
+            VStack{
+                Button {
+                    addedItem.toggle()
+                    orders.addOrder(item, quantity: 1)
+                }label: {
+                    HStack{
+                        Text(item.price,format: .currency(code: "USD"))
+                        Image(systemName: addedItem ? "cart" : "bag")
+                    }.foregroundColor(.white)
+                }.padding()
+            }.disabled(item.id < 0)
+            .padding(.horizontal,100)
+            .background(.red,in: Capsule())
         }
     }
 }
 
 #Preview {
-    MenuItemView(item: .constant(testMenuItem))
+    MenuItemView(item: .constant(testMenuItem), orders: OrderModel())
 }

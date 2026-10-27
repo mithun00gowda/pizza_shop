@@ -8,14 +8,26 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @EnvironmentObject var orders : OrderModel
+    @Environment(\.verticalSizeClass) var vSizeClass:UserInterfaceSizeClass?
     var body: some View {
-        ZStack(alignment:.bottomTrailing) {
-//            Image("appbar").resizable().scaledToFit().ignoresSafeArea()
-            Text("Mithun Pizza Shop").font(.title).bold()
-        }
+        VStack {
+            if(vSizeClass ?? .regular) != .compact{
+                ZStack(alignment:.bottomTrailing) {
+                                Image("surfBanner").resizable().scaledToFit().ignoresSafeArea()
+                    Text("Mithun Pizza Shop").foregroundColor(.white).font(.title).bold()
+                }
+            }else {
+                HStack(alignment:.bottom){
+                    Image("surfBanner").resizable().scaledToFit().ignoresSafeArea()
+                    Text("Mithun Pizza Shop").font(.title).bold()
+                }
+            }
+            
+        }.background(.ultraThinMaterial)
     }
 }
 
 #Preview {
-    HeaderView()
+    HeaderView().environmentObject(OrderModel())
 }
