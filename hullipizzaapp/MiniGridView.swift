@@ -22,6 +22,9 @@ struct MiniGridView: View {
                         .onTapGesture{
                             selectedItem = item
                         }
+                        .onLongPressGesture{
+                            selectedItem = noMenuItem
+                        }
                     }
                 }
             }
